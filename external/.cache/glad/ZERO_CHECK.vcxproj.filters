@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\glad\CMakeFiles\472d8ab8952453840fd48fc1ec6f25eb\generate.stamp.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\glad\CMakeFiles\fe3de7caa8b95069672c2f3051293cd0\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{FC344A91-0E34-351C-8666-BD1B1465372F}</UniqueIdentifier>
+      <UniqueIdentifier>{AFA0A58B-E88E-35ED-BFF0-E512A4AA5E1A}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

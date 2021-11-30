@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-mkdir.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-mkdir.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-download.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-update.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-update.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-patch.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-patch.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-configure.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-configure.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-build.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-build.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-install.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-install.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\ddddd56ae0c5f9ad126ddda747d0869d\libigl-imgui-download-test.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\9aa359fba074788caacbb234f037cf21\libigl-imgui-download-test.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\f159ac761d7de3a7bc9eb9126353b6eb\libigl-imgui-download-complete.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\cea7976508ae2b5b49af3930c2d624ab\libigl-imgui-download-complete.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\c9de9e906fefc017297a967846bb42ae\libigl-imgui-download.rule">
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\b5c510841fca97869f3106bf0a6afe0b\libigl-imgui-download.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
-    <CustomBuild Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Dev\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\libigl-imgui-download" />
+    <None Include="C:\Users\elikk\Desktop\ASS2\EngineForAnimationCourse\external\.cache\libigl-imgui\CMakeFiles\libigl-imgui-download" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{C41D8330-3953-3EA8-9389-FFA178DD58D3}</UniqueIdentifier>
+      <UniqueIdentifier>{9E463689-D301-3784-98E8-F2B75E8A5A0B}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
