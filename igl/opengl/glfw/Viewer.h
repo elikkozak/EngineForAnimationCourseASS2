@@ -122,7 +122,6 @@ namespace glfw
     IGL_INLINE size_t mesh_index(const int id) const;
 
 	Eigen::Matrix4d CalcParentsTrans(int indx);
-    void draw_box(Eigen::AlignedBox<double, 3> box);
 	inline bool SetAnimation() { return isActive = !isActive; }
 public:
     //////////////////////

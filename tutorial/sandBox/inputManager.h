@@ -165,23 +165,23 @@ static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 			rndr->TranslateCamera(Eigen::Vector3f(0, 0, -0.03f));
 			break;
 		case GLFW_KEY_UP:
-			scn->dir = (Eigen::Vector3d(0, 0.01, 0));
+			scn->dir = (Eigen::Vector3d(0, 0.005, 0));
 			//rndr->TranslateCamera(Eigen::Vector3f(0, 0.01f,0));
 			break;
 		case GLFW_KEY_DOWN:
-			scn->dir = (Eigen::Vector3d(0, -0.01, 0));
+			scn->dir = (Eigen::Vector3d(0, -0.005, 0));
 
 			//rndr->TranslateCamera(Eigen::Vector3f(0, -0.01f,0));
 
 			break;
 		case GLFW_KEY_LEFT:
-			scn->dir = (Eigen::Vector3d(-0.01, 0, 0));
+			scn->dir = (Eigen::Vector3d(-0.005, 0, 0));
 
 				//rndr->TranslateCamera(Eigen::Vector3f(-0.01f, 0,0));
 			break;
 		case GLFW_KEY_RIGHT:
 			//rndr->TranslateCamera(Eigen::Vector3f(0.01f, 0, 0));
-			scn->dir = (Eigen::Vector3d(0.01, 0, 0));
+			scn->dir = (Eigen::Vector3d(0.005, 0, 0));
 
 			break;
 		case ' ':		

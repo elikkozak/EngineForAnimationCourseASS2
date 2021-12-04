@@ -229,7 +229,6 @@ public:
   Eigen::Matrix<float, 4, 1, Eigen::DontAlign> line_color;
   Eigen::Matrix<float, 4, 1, Eigen::DontAlign> label_color;
 
-  Eigen::Vector3d dir = Eigen::Vector3d(0.01, 0, 0);
   // Shape material
   float shininess;
 

@@ -197,11 +197,6 @@ void Renderer::TranslateCamera(Eigen::Vector3f amt)
 	core().camera_translation += amt;
 }
 
-void Renderer::TranslateWithVelocity(Eigen::Vector3d amt)
-{
-		scn->data().TranslateInSystem(scn->GetRotation(), amt);
-	
-}
 
 
 void Renderer::RotateCamera(float amtX, float amtY)
@@ -380,6 +375,140 @@ IGL_INLINE void Renderer::resize(GLFWwindow* window,int w, int h)
 	//}
 
 	bool Renderer::check_collision_cond(Eigen::AlignedBox<double, 3> box_1, Eigen::AlignedBox<double, 3> box_2) {
+		double R, R_0, R_1;
+		Eigen::RowVector3d P_A = box_1.center();
+		Eigen::RowVector3d A_x = scn->data_list[0].GetRotation() * Eigen::Vector3d(1, 0, 0);
+		Eigen::RowVector3d A_y = scn->data_list[0].GetRotation() * Eigen::Vector3d(0, 1, 0);
+		Eigen::RowVector3d A_z = scn->data_list[0].GetRotation() * Eigen::Vector3d(0, 0, 1);
+		double W_A = box_1.sizes()[0] / 2;
+		double H_A = box_1.sizes()[1] / 2;
+		double D_A = box_1.sizes()[2] / 2;
+		Eigen::Matrix3d A;
+		A << A_x[0], A_x[1], A_x[2],
+			 A_y[0], A_y[1], A_y[2],
+			 A_z[0], A_z[1], A_z[2];
+
+
+		Eigen::RowVector3d P_B = box_2.center();
+		Eigen::RowVector3d B_x = scn->data_list[1].GetRotation() * Eigen::Vector3d(1, 0, 0);
+		Eigen::RowVector3d B_y = scn->data_list[1].GetRotation() * Eigen::Vector3d(0, 1, 0);
+		Eigen::RowVector3d B_z = scn->data_list[1].GetRotation() * Eigen::Vector3d(0, 0, 1);
+		double W_B = box_2.sizes()[0] / 2;
+		double H_B = box_2.sizes()[1] / 2;
+		double D_B = box_2.sizes()[2] / 2;
+		Eigen::Matrix3d B;
+		B << B_x[0], B_y[0], B_z[0],
+			 B_x[1], B_y[1], B_z[1],
+			 B_x[2], B_y[2], B_z[2];
 		
+		 
+		Eigen::RowVector3d T = P_B - P_A;
+		Eigen::Matrix3d R_mat = A * B;
+
+		//CASE 1:
+		R_0 = W_A;
+		R_1 = W_B * abs(R_mat(0,0)) + H_B * abs(R_mat(0, 1)) + D_B * abs(R_mat(0, 2));
+		R = abs(T.dot(A_x));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 2:
+		R_0 = H_A;
+		R_1 = W_B * abs(R_mat(1, 0)) + H_B * abs(R_mat(1, 1)) + D_B * abs(R_mat(1, 2));
+		R = abs(T.dot(A_y));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 3:
+		R_0 = D_A;
+		R_1 = W_B * abs(R_mat(2, 0)) + H_B * abs(R_mat(2, 1)) + D_B * abs(R_mat(2, 2));
+		R = abs(T.dot(A_z));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 4:
+		R_0 = W_A * abs(R_mat(0, 0)) + H_A * abs(R_mat(1, 0)) + D_A * abs(R_mat(2, 0));
+		R_1 = W_B;
+		R = abs(T.dot(B_x));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 5:
+		R_0 = W_A * abs(R_mat(0, 1)) + H_A * abs(R_mat(1, 1)) + D_A * abs(R_mat(2, 1));
+		R_1 = H_B;
+		R = abs(T.dot(B_y));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 6:
+		R_0 = W_A * abs(R_mat(0, 2)) + H_A * abs(R_mat(1, 2)) + D_A * abs(R_mat(2, 2));
+		R_1 = D_B;
+		R = abs(T.dot(B_z));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 7:
+		R_0 = H_A * abs(R_mat(2, 0)) + D_A * abs(R_mat(1, 0));
+		R_1 = H_B * abs(R_mat(0, 2)) + D_B * abs(R_mat(0, 1));
+		R = abs(R_mat(1, 0) * T.dot(A_z) - R_mat(2, 0) * T.dot(A_y));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 8:
+		R_0 = H_A * abs(R_mat(2, 1)) + D_A * abs(R_mat(1, 1));
+		R_1 = W_B * abs(R_mat(0, 2)) + D_B * abs(R_mat(0, 0));
+		R = abs(R_mat(1, 1) * T.dot(A_z) - R_mat(2, 1) * T.dot(A_y));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 9:
+		R_0 = H_A * abs(R_mat(2, 2)) + D_A * abs(R_mat(1, 2));
+		R_1 = W_B * abs(R_mat(0, 1)) + H_B * abs(R_mat(0, 0));
+		R = abs(R_mat(1, 2) * T.dot(A_z) - R_mat(2, 2) * T.dot(A_y));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 10:
+		R_0 = W_A * abs(R_mat(2, 0)) + D_A * abs(R_mat(0, 0));
+		R_1 = H_B * abs(R_mat(1, 2)) + D_B * abs(R_mat(1, 1));
+		R = abs(R_mat(2, 0) * T.dot(A_x) - R_mat(0, 0) * T.dot(A_z));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 11:
+		R_0 = W_A * abs(R_mat(2, 1)) + D_A * abs(R_mat(0,1 ));
+		R_1 = W_B * abs(R_mat(1, 2)) + D_B * abs(R_mat(1, 0));
+		R = abs(R_mat(2, 1) * T.dot(A_x) - R_mat(0, 1) * T.dot(A_z));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 12:
+		R_0 = W_A * abs(R_mat(2, 2)) + D_A * abs(R_mat(0, 2));
+		R_1 = W_B * abs(R_mat(1, 1)) + H_B * abs(R_mat(1, 0));
+		R = abs(R_mat(2, 2) * T.dot(A_x) - R_mat(0, 2) * T.dot(A_z));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 13:
+		R_0 = W_A * abs(R_mat(1, 0)) + H_A * abs(R_mat(0, 0));
+		R_1 = H_B * abs(R_mat(2, 2)) + D_B * abs(R_mat(2, 1));
+		R = abs(R_mat(0, 0) * T.dot(A_y) - R_mat(1, 0) * T.dot(A_x));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 14:
+		R_0 = W_A * abs(R_mat(1, 1)) + H_A * abs(R_mat(0, 1));
+		R_1 = W_B * abs(R_mat(2, 2)) + D_B * abs(R_mat(2, 0));
+		R = abs(R_mat(0, 1) * T.dot(A_y) - R_mat(1, 1) * T.dot(A_x));
+		if (R > R_0 + R_1)
+			return false;
+
+		//CASE 15:
+		R_0 = W_A * abs(R_mat(1, 2)) + H_A * abs(R_mat(0, 2));
+		R_1 = W_B * abs(R_mat(2, 1)) + H_B * abs(R_mat(2, 0));
+		R = abs(R_mat(0, 2) * T.dot(A_y) - R_mat(1, 2) * T.dot(A_x));
+		if (R > R_0 + R_1)
+			return false;
+
 		return true;
 	}
