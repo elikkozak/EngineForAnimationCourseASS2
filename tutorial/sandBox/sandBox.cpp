@@ -16,6 +16,7 @@ void SandBox::Init(const std::string &config)
 {
 	std::string item_name;
 	std::ifstream nameFileout;
+	double i = -0.5;
 	doubleVariable = 0;
 	nameFileout.open(config);
 	if (!nameFileout.is_open())
@@ -37,7 +38,15 @@ void SandBox::Init(const std::string &config)
 			data().line_width = 2;
 			data().set_visible(false, 1);
 
-			
+			//SET LOCATION NO TOUCHY
+			data().TranslateInSystem(GetRotation(), Eigen::Vector3d(i*2, 0, 0));
+			i++;
+
+			//DRAW A BOX
+			data().tree.init(data().V, data().F);
+			igl::AABB<Eigen::MatrixXd, 3> tree = data().tree;
+			Eigen::AlignedBox<double, 3> box = tree.m_box;
+			data().drawBox(box);
 		}
 		nameFileout.close();
 	}
@@ -56,9 +65,11 @@ void SandBox::Animate()
 {
 	if (isActive)
 	{
-		
-		
-		
+
+	}
+	if (isMoving) {
+		data_list[0].TranslateInVelocity(GetRotation(),dir);
+		//renderer->checkCollision();
 	}
 }
 

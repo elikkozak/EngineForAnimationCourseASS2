@@ -42,6 +42,12 @@ void Movable::TranslateInSystem(Eigen::Matrix3d rot, Eigen::Vector3d amt)
 {
 	Tout.pretranslate(rot.transpose() * amt);
 }
+
+void Movable::TranslateInVelocity(Eigen::Matrix3d rot, Eigen::Vector3d amt)
+{
+	Tout.pretranslate(rot.transpose() * amt);
+}
+
 //angle in radians
 void Movable::MyRotate(Eigen::Vector3d rotAxis, double angle)
 {

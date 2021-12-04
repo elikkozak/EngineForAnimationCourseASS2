@@ -16,6 +16,7 @@
 //#include <Eigen/Core>
 #include <memory>
 #include <vector>
+#include "igl/AABB.h"
 
 
 // Alec: This is a mesh class containing a variety of data types (normals,
@@ -31,6 +32,7 @@
 //
 namespace igl
 {
+  
 
 // TODO: write documentation
 namespace opengl
@@ -49,6 +51,8 @@ public:
 
   // Change the visualization mode, invalidating the cache if necessary
   IGL_INLINE void set_face_based(bool newvalue);
+
+  void drawBox(Eigen::AlignedBox<double, 3> box);
 
   // Helpers that can draw the most common meshes
   IGL_INLINE void set_mesh(const Eigen::MatrixXd& V, const Eigen::MatrixXi& F);
@@ -170,6 +174,10 @@ public:
   Eigen::MatrixXd V_uv; // UV vertices
   Eigen::MatrixXi F_uv; // optional faces for UVs
 
+
+  igl::AABB<Eigen::MatrixXd, 3> tree;
+
+
   // Texture
   Eigen::Matrix<unsigned char,Eigen::Dynamic,Eigen::Dynamic> texture_R;
   Eigen::Matrix<unsigned char,Eigen::Dynamic,Eigen::Dynamic> texture_G;
@@ -221,11 +229,13 @@ public:
   Eigen::Matrix<float, 4, 1, Eigen::DontAlign> line_color;
   Eigen::Matrix<float, 4, 1, Eigen::DontAlign> label_color;
 
+  Eigen::Vector3d dir = Eigen::Vector3d(0.01, 0, 0);
   // Shape material
   float shininess;
 
   // Unique identifier
   int id;
+
 
   // OpenGL representation of the mesh
   igl::opengl::MeshGL meshgl;

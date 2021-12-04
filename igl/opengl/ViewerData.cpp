@@ -47,6 +47,43 @@ IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)
   }
 }
 
+void igl::opengl::ViewerData::drawBox(Eigen::AlignedBox<double, 3> box) {
+    point_size = 10;
+    line_width = 2;
+    Eigen::RowVector3d colorVec;
+    
+	colorVec = Eigen::RowVector3d(255, 0, 0);\
+
+    Eigen::RowVector3d v_0 = box.corner(box.BottomLeftFloor);  //vertices of box are like this
+    Eigen::RowVector3d v_1 = box.corner(box.TopLeftFloor);//        v5-----v6 
+    Eigen::RowVector3d v_2 = box.corner(box.TopRightFloor);//      /|      /|  
+    Eigen::RowVector3d v_3 = box.corner(box.BottomRightFloor);//  v4------v7|
+	Eigen::RowVector3d v_4 = box.corner(box.BottomLeftCeil);//    | |     | |
+    Eigen::RowVector3d v_5 = box.corner(box.TopLeftCeil);//       |v1------v2 
+	Eigen::RowVector3d v_6 = box.corner(box.TopRightCeil); //     |/      |/  
+	Eigen::RowVector3d v_7 = box.corner(box.BottomRightCeil);//   v0------v3
+
+    add_edges(v_0, v_1, colorVec);
+    add_edges(v_0, v_3, colorVec);
+    add_edges(v_0, v_4, colorVec);
+
+    add_edges(v_1, v_2, colorVec);
+    add_edges(v_1, v_5, colorVec);
+
+    add_edges(v_2, v_3, colorVec);
+    add_edges(v_2, v_6, colorVec);
+
+    add_edges(v_3, v_7, colorVec);
+
+    add_edges(v_4, v_5, colorVec);
+    add_edges(v_4, v_7, colorVec);
+
+    add_edges(v_5, v_6, colorVec);
+
+    add_edges(v_6, v_7, colorVec);
+ 
+}
+
 // Helpers that draws the most common meshes
 IGL_INLINE void igl::opengl::ViewerData::set_mesh(
     const Eigen::MatrixXd& _V, const Eigen::MatrixXi& _F)
@@ -727,4 +764,6 @@ IGL_INLINE void igl::opengl::ViewerData::updateGL(
       meshgl.points_F_vbo(i) = i;
     }
   }
+
+  
 }

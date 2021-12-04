@@ -362,6 +362,11 @@ namespace glfw
 
 	  return prevTrans;
   }
+ 
+  void Viewer::toggle_move()
+  {
+      isMoving = !isMoving;
+  }
 
 } // end namespace
 } // end namespace

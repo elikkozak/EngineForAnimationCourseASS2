@@ -197,6 +197,13 @@ void Renderer::TranslateCamera(Eigen::Vector3f amt)
 	core().camera_translation += amt;
 }
 
+void Renderer::TranslateWithVelocity(Eigen::Vector3d amt)
+{
+		scn->data().TranslateInSystem(scn->GetRotation(), amt);
+	
+}
+
+
 void Renderer::RotateCamera(float amtX, float amtY)
 {
 	core().camera_eye = core().camera_eye + Eigen::Vector3f(0,amtY,0);
@@ -371,3 +378,8 @@ IGL_INLINE void Renderer::resize(GLFWwindow* window,int w, int h)
 	//		}
 	//	}
 	//}
+
+	bool Renderer::check_collision_cond(Eigen::AlignedBox<double, 3> box_1, Eigen::AlignedBox<double, 3> box_2) {
+		
+		return true;
+	}
