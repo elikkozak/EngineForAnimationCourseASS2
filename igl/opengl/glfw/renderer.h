@@ -70,6 +70,7 @@ public:
 	IGL_INLINE int append_core(Eigen::Vector4f viewport, bool append_empty = false);
 
 	bool check_collision_cond(Eigen::AlignedBox<double, 3> box_1, Eigen::AlignedBox<double, 3> box_2);
+	void check_collition();
 
 	// Erase a viewport
 	//

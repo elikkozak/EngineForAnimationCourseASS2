@@ -376,20 +376,29 @@ IGL_INLINE void Renderer::resize(GLFWwindow* window,int w, int h)
 
 	bool Renderer::check_collision_cond(Eigen::AlignedBox<double, 3> box_1, Eigen::AlignedBox<double, 3> box_2) {
 		double R, R_0, R_1;
-		Eigen::RowVector3d P_A = box_1.center();
+
+		Eigen::Matrix4d A_trans = scn->data_list[0].MakeTransd();
+		Eigen::Vector4d A_vec_center = Eigen::Vector4d(box_1.center()[0], box_1.center()[1], box_1.center()[2], 1);
+		Eigen::Vector4d A_vec_center_trans = A_trans * A_vec_center;
+		Eigen::RowVector3d P_A = Eigen::RowVector3d(A_vec_center_trans.x(), A_vec_center_trans.y(), A_vec_center_trans.z());
+
 		Eigen::RowVector3d A_x = scn->data_list[0].GetRotation() * Eigen::Vector3d(1, 0, 0);
 		Eigen::RowVector3d A_y = scn->data_list[0].GetRotation() * Eigen::Vector3d(0, 1, 0);
 		Eigen::RowVector3d A_z = scn->data_list[0].GetRotation() * Eigen::Vector3d(0, 0, 1);
 		double W_A = box_1.sizes()[0] / 2;
 		double H_A = box_1.sizes()[1] / 2;
 		double D_A = box_1.sizes()[2] / 2;
+		
 		Eigen::Matrix3d A;
 		A << A_x[0], A_x[1], A_x[2],
 			 A_y[0], A_y[1], A_y[2],
 			 A_z[0], A_z[1], A_z[2];
 
+		Eigen::Matrix4d B_trans = scn->data_list[1].MakeTransd();
+		Eigen::Vector4d B_vec_center = Eigen::Vector4d(box_2.center()[0], box_2.center()[1], box_2.center()[2], 1);
+		Eigen::Vector4d B_vec_center_trans = A_trans * A_vec_center;
+		Eigen::RowVector3d P_B = Eigen::RowVector3d(B_vec_center_trans.x(), B_vec_center_trans.y(), B_vec_center_trans.z());
 
-		Eigen::RowVector3d P_B = box_2.center();
 		Eigen::RowVector3d B_x = scn->data_list[1].GetRotation() * Eigen::Vector3d(1, 0, 0);
 		Eigen::RowVector3d B_y = scn->data_list[1].GetRotation() * Eigen::Vector3d(0, 1, 0);
 		Eigen::RowVector3d B_z = scn->data_list[1].GetRotation() * Eigen::Vector3d(0, 0, 1);
@@ -511,4 +520,15 @@ IGL_INLINE void Renderer::resize(GLFWwindow* window,int w, int h)
 			return false;
 
 		return true;
+	}
+
+	void Renderer::check_collition()
+	{
+		igl::AABB<Eigen::MatrixXd, 3> node1 = scn->data_list[0].tree;
+		igl::AABB<Eigen::MatrixXd, 3> node2 = scn->data_list[1].tree;
+
+		if (check_collision_cond(node1.m_box, node2.m_box)) {
+			std::cout << "Collision detected! " << std::endl;
+			scn->isMoving = false;
+		}
 	}

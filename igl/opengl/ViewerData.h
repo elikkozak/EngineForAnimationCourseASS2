@@ -54,6 +54,8 @@ public:
 
   void drawBox(Eigen::AlignedBox<double, 3> box);
 
+  void removeDrawBox(Eigen::AlignedBox<double, 3> box);
+
   // Helpers that can draw the most common meshes
   IGL_INLINE void set_mesh(const Eigen::MatrixXd& V, const Eigen::MatrixXi& F);
   IGL_INLINE void set_vertices(const Eigen::MatrixXd& V);

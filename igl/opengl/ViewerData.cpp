@@ -47,12 +47,13 @@ IGL_INLINE void igl::opengl::ViewerData::set_face_based(bool newvalue)
   }
 }
 
-void igl::opengl::ViewerData::drawBox(Eigen::AlignedBox<double, 3> box) {
+void igl::opengl::ViewerData::
+drawBox(Eigen::AlignedBox<double, 3> box) {
     point_size = 10;
     line_width = 2;
     Eigen::RowVector3d colorVec;
     
-	colorVec = Eigen::RowVector3d(255, 0, 0);\
+	colorVec = Eigen::RowVector3d(255, 0, 0);
 
     Eigen::RowVector3d v_0 = box.corner(box.BottomLeftFloor);  //vertices of box are like this
     Eigen::RowVector3d v_1 = box.corner(box.TopLeftFloor);//        v5-----v6 
@@ -83,6 +84,46 @@ void igl::opengl::ViewerData::drawBox(Eigen::AlignedBox<double, 3> box) {
     add_edges(v_6, v_7, colorVec);
  
 }
+
+
+void igl::opengl::ViewerData::
+ removeDrawBox(Eigen::AlignedBox<double, 3> box) {
+    point_size = 10;
+    line_width = 2;
+    Eigen::RowVector3d colorVec;
+
+    colorVec = Eigen::RowVector3d(0, 255, 0);
+
+    Eigen::RowVector3d v_0 = box.corner(box.BottomLeftFloor);  //vertices of box are like this
+    Eigen::RowVector3d v_1 = box.corner(box.TopLeftFloor);//        v5-----v6 
+    Eigen::RowVector3d v_2 = box.corner(box.TopRightFloor);//      /|      /|  
+    Eigen::RowVector3d v_3 = box.corner(box.BottomRightFloor);//  v4------v7|
+    Eigen::RowVector3d v_4 = box.corner(box.BottomLeftCeil);//    | |     | |
+    Eigen::RowVector3d v_5 = box.corner(box.TopLeftCeil);//       |v1------v2 
+    Eigen::RowVector3d v_6 = box.corner(box.TopRightCeil); //     |/      |/  
+    Eigen::RowVector3d v_7 = box.corner(box.BottomRightCeil);//   v0------v3
+
+    set_edges(v_0, v_1.cast<int>(), colorVec);
+    set_edges(v_0, v_3.cast<int>(), colorVec);
+    set_edges(v_0, v_4.cast<int>(), colorVec);
+
+    set_edges(v_1, v_2.cast<int>(), colorVec);
+    set_edges(v_1, v_5.cast<int>(), colorVec);
+
+    set_edges(v_2, v_3.cast<int>(), colorVec);
+    set_edges(v_2, v_6.cast<int>(), colorVec);
+
+    set_edges(v_3, v_7.cast<int>(), colorVec);
+
+    set_edges(v_4, v_5.cast<int>(), colorVec);
+    set_edges(v_4, v_7.cast<int>(), colorVec);
+
+    set_edges(v_5, v_6.cast<int>(), colorVec);
+
+    set_edges(v_6, v_7.cast<int>(), colorVec);
+
+}
+
 
 // Helpers that draws the most common meshes
 IGL_INLINE void igl::opengl::ViewerData::set_mesh(
